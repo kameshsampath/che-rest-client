@@ -1,0 +1,134 @@
+[
+  {
+    "temporary": false,
+    "config": {
+      "projects": [],
+      "commands": [
+        {
+          "commandLine": "mvn clean install -f ${current.project.path}",
+          "name": "build",
+          "type": "mvn",
+          "attributes": {
+            "goal": "Build",
+            "previewUrl": ""
+          }
+        }
+      ],
+      "defaultEnv": "default",
+      "name": "test-ws",
+      "environments": {
+        "default": {
+          "recipe": {
+            "location": "rhche/centos_jdk8",
+            "type": "dockerimage"
+          },
+          "machines": {
+            "dev-machine": {
+              "agents": [
+                "org.eclipse.che.terminal",
+                "org.eclipse.che.ws-agent",
+                "com.redhat.bayesian.lsp",
+                "org.eclipse.che.exec"
+              ],
+              "servers": {},
+              "attributes": {
+                "memoryLimitBytes": "2147483648"
+              }
+            }
+          }
+        }
+      },
+      "links": []
+    },
+    "namespace": "che",
+    "id": "workspacejgm9m90eiyjpn4oe",
+    "attributes": {
+      "updated": "1502988583537",
+      "created": "1502988583125",
+      "stackId": "java-centos"
+    },
+    "status": "STARTING",
+    "links": [
+      {
+        "rel": "self link",
+        "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/workspace/workspacejgm9m90eiyjpn4oe",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "rel": "start workspace",
+        "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/workspace/workspacejgm9m90eiyjpn4oe/runtime",
+        "method": "POST",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "rel": "remove workspace",
+        "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/workspace/workspacejgm9m90eiyjpn4oe",
+        "method": "DELETE",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "rel": "get all user workspaces",
+        "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/workspace",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "rel": "get workspace snapshot",
+        "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/workspace/workspacejgm9m90eiyjpn4oe/snapshot",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "text/html",
+        "rel": "ide url",
+        "href": "http://che-eclipse-che.192.168.64.5.nip.io/che/test-ws",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "rel": "get workspace events channel",
+        "href": "ws://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/ws",
+        "method": "GET",
+        "parameters": [
+          {
+            "required": true,
+            "valid": [],
+            "name": "channel",
+            "defaultValue": "workspace:workspacejgm9m90eiyjpn4oe"
+          }
+        ]
+      },
+      {
+        "rel": "environment.output_channel",
+        "href": "ws://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/ws",
+        "method": "GET",
+        "parameters": [
+          {
+            "required": true,
+            "valid": [],
+            "name": "channel",
+            "defaultValue": "workspace:workspacejgm9m90eiyjpn4oe:environment_output"
+          }
+        ]
+      },
+      {
+        "rel": "environment.status_channel",
+        "href": "ws://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/ws",
+        "method": "GET",
+        "parameters": [
+          {
+            "required": true,
+            "valid": [],
+            "name": "channel",
+            "defaultValue": "workspace:workspacejgm9m90eiyjpn4oe:machines_statuses"
+          }
+        ]
+      }
+    ]
+  }
+]
