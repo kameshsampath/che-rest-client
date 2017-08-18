@@ -5,11 +5,8 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Command {
+public class StackComponent {
 
   private String name;
-  private String type;
-  private String commandLine;
-  private String workingDir;
-  private CommandAttribute attributes;
+  private String version;
 }

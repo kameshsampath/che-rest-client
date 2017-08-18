@@ -1,0 +1,120 @@
+[
+  {
+    "tags": [
+      "Java",
+      "JDK",
+      "Maven",
+      "Spring Boot",
+      "CentOS",
+      "Git"
+    ],
+    "workspaceConfig": {
+      "projects": [],
+      "commands": [
+        {
+          "commandLine": "scl enable rh-maven33 'mvn clean install -f ${current.project.path}'",
+          "name": "build",
+          "type": "mvn",
+          "attributes": {
+            "goal": "Build",
+            "previewUrl": ""
+          }
+        },
+        {
+          "commandLine": "scl enable rh-maven33 'mvn compile spring-boot:run -f ${current.project.path}'",
+          "name": "run",
+          "type": "custom",
+          "attributes": {
+            "goal": "Run",
+            "previewUrl": "http://${server.port.8080}"
+          }
+        },
+        {
+          "commandLine": "scl enable rh-maven33 'mvn spring-boot:run -Drun.jvmArguments=\"-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005\" -f ${current.project.path}'",
+          "name": "debug",
+          "type": "custom",
+          "attributes": {
+            "goal": "Debug",
+            "previewUrl": "http://${server.port.8080}"
+          }
+        }
+      ],
+      "defaultEnv": "default",
+      "name": "default",
+      "environments": {
+        "default": {
+          "recipe": {
+            "location": "rhche/spring-boot",
+            "type": "dockerimage"
+          },
+          "machines": {
+            "dev-machine": {
+              "agents": [
+                "org.eclipse.che.terminal",
+                "org.eclipse.che.ws-agent",
+                "com.redhat.bayesian.lsp"
+              ],
+              "servers": {},
+              "attributes": {
+                "memoryLimitBytes": "2147483648"
+              }
+            }
+          }
+        }
+      },
+      "links": []
+    },
+    "components": [
+      {
+        "version": "---",
+        "name": "CentOS"
+      },
+      {
+        "version": "1.8.0",
+        "name": "JDK"
+      },
+      {
+        "version": "3.3",
+        "name": "Maven"
+      }
+    ],
+    "creator": "Gytis Trikleris",
+    "scope": "general",
+    "description": "Spring Boot Stack on CentOS.",
+    "source": {
+      "origin": "rhche/spring-boot",
+      "type": "image"
+    },
+    "name": "Spring Boot",
+    "id": "spring-boot",
+    "links": [
+      {
+        "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/stack/spring-boot",
+        "rel": "remove stack",
+        "method": "DELETE",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/stack/spring-boot",
+        "rel": "get stack by id",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "image/svg+xml",
+        "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/stack/spring-boot/icon",
+        "rel": "delete icon link",
+        "method": "DELETE",
+        "parameters": []
+      },
+      {
+        "produces": "image/svg+xml",
+        "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/stack/spring-boot/icon",
+        "rel": "get icon link",
+        "method": "GET",
+        "parameters": []
+      }
+    ]
+  }
+]

@@ -5,9 +5,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.workspace7.openshift.che.data.Workspace;
-import org.workspace7.openshift.che.service.WorkspaceClientService;
-import org.workspace7.openshift.che.service.WorkspaceService;
+import org.workspace7.openshift.che.data.Stack;
+import org.workspace7.openshift.che.service.StackClientService;
 
 import java.util.List;
 
@@ -15,17 +14,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class WorkspaceQueryTest {
+public class StackQueryIT {
 
   @Autowired
-  private WorkspaceClientService workspaceService;
+  private StackClientService stackClientService;
 
   @Test
   public void workspaceQueryTest() {
 
-    assertThat(workspaceService).isNotNull();
+    assertThat(stackClientService).isNotNull();
 
-    List<Workspace> workspaces = workspaceService.allWorkspaces();
+    List<Stack> workspaces = stackClientService.allStacks();
 
     assertThat(workspaces).isNotNull();
     assertThat(workspaces.isEmpty()).isFalse();

@@ -12,7 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 //TODO more test cases to add
-public class WorkspaceObjectMapperTests {
+public class WorkspaceObjectMapperTest {
 
   @Test
   public void testDeserialize() throws Exception {
