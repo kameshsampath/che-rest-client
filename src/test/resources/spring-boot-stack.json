@@ -1,0 +1,118 @@
+{
+  "name": "Spring Boot",
+  "source": {
+    "origin": "rhche/spring-boot",
+    "type": "image"
+  },
+  "components": [
+    {
+      "version": "---",
+      "name": "CentOS"
+    },
+    {
+      "version": "1.8.0",
+      "name": "JDK"
+    },
+    {
+      "version": "3.3",
+      "name": "Maven"
+    }
+  ],
+  "id": "spring-boot",
+  "tags": [
+    "Java",
+    "JDK",
+    "Maven",
+    "Spring Boot",
+    "CentOS",
+    "Git"
+  ],
+  "workspaceConfig": {
+    "environments": {
+      "default": {
+        "machines": {
+          "dev-machine": {
+            "attributes": {
+              "memoryLimitBytes": "2147483648"
+            },
+            "servers": {},
+            "agents": [
+              "org.eclipse.che.terminal",
+              "org.eclipse.che.ws-agent",
+              "com.redhat.bayesian.lsp"
+            ]
+          }
+        },
+        "recipe": {
+          "location": "rhche/spring-boot",
+          "type": "dockerimage"
+        }
+      }
+    },
+    "defaultEnv": "default",
+    "name": "default",
+    "projects": [],
+    "commands": [
+      {
+        "commandLine": "scl enable rh-maven33 \u0027mvn clean install -f ${current.project.path}\u0027",
+        "name": "build",
+        "attributes": {
+          "goal": "Build",
+          "previewUrl": ""
+        },
+        "type": "mvn"
+      },
+      {
+        "commandLine": "scl enable rh-maven33 \u0027mvn compile spring-boot:run -f ${current.project.path}\u0027",
+        "name": "run",
+        "attributes": {
+          "goal": "Run",
+          "previewUrl": "http://${server.port.8080}"
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "scl enable rh-maven33 \u0027mvn spring-boot:run -Drun.jvmArguments\u003d\"-Xdebug -Xrunjdwp:transport\u003ddt_socket,server\u003dy,suspend\u003dy,address\u003d5005\" -f ${current.project.path}\u0027",
+        "name": "debug",
+        "attributes": {
+          "goal": "Debug",
+          "previewUrl": "http://${server.port.8080}"
+        },
+        "type": "custom"
+      }
+    ],
+    "links": []
+  },
+  "description": "Spring Boot Stack on CentOS.",
+  "creator": "Gytis Trikleris",
+  "scope": "general",
+  "links": [
+    {
+      "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/stack/spring-boot",
+      "parameters": [],
+      "method": "DELETE",
+      "rel": "remove stack"
+    },
+    {
+      "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/stack/spring-boot",
+      "parameters": [],
+      "method": "GET",
+      "rel": "get stack by id",
+      "produces": "application/json"
+    },
+    {
+      "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/stack/spring-boot/icon",
+      "parameters": [],
+      "method": "DELETE",
+      "rel": "delete icon link",
+      "produces": "image/svg+xml"
+    },
+    {
+      "href": "http://che-eclipse-che.192.168.64.5.nip.io/wsmaster/api/stack/spring-boot/icon",
+      "parameters": [],
+      "method": "GET",
+      "rel": "get icon link",
+      "produces": "image/svg+xml"
+    }
+  ]
+}

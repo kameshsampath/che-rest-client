@@ -1,18 +1,15 @@
 package org.workspace7.openshift.che.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.Map;
-
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class WorkspaceEnvironment {
 
-  @JsonProperty("machines")
-  private Map<String, MachineMap> machines;
-
-  @JsonProperty("recipe")
-  private Recipe recipe;
+  @JsonProperty("default")
+  private DefaultWorkspaceEnv defaultWorkspaceEnv;
 }

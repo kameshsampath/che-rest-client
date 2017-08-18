@@ -1,5 +1,6 @@
 package org.workspace7.openshift.che.service;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -30,16 +31,20 @@ public class StackClientService {
     return Collections.emptyList();
   }
 
-  private List<Stack> parseJson(String stacksJson) {
+  public Stack stackById(String stackId) {
+    log.info("Querying Stack for Id {}", stackId);
     try {
-      List<Stack> stacks = objectMapper().readValue(stacksJson, stackList());
-      log.info("Retrieved {} stacks", stacks.size());
-      return stacks;
-    } catch (IOException e) {
-      log.error("Error reading  stack json", e);
+      String stacksJson = stackService.stackById(stackId);
+      log.info("Stack {}", stacksJson);
+      Stack stack = objectMapper().readValue(stacksJson, Stack.class);
+      log.info("Retrieved Stack {}", stack);
+      return stack;
+    } catch (Exception e) {
+      log.error("Error reading stack json", e);
     }
-    return Collections.emptyList();
+    return null;
   }
+
 
   public List<Stack> stackByTag(Map<String, Object> tagQueryMap) {
     log.info("Querying all Stacks");
@@ -57,6 +62,19 @@ public class StackClientService {
 
   protected ObjectMapper objectMapper() {
     return new ObjectMapper()
+      .setSerializationInclusion(JsonInclude.Include.NON_NULL)
       .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+  }
+
+
+  private List<Stack> parseJson(String stacksJson) {
+    try {
+      List<Stack> stacks = objectMapper().readValue(stacksJson, stackList());
+      log.info("Retrieved {} stacks", stacks.size());
+      return stacks;
+    } catch (IOException e) {
+      log.error("Error reading  stack json", e);
+    }
+    return Collections.emptyList();
   }
 }
